@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>可樂旅遊：東京逍遙遊 6 天 5 夜行程</title>
+  <style>
+    :root {
+      --primary-color: #8b5cf6; /* 可樂旅遊紫色調 */
+      --primary-dark: #6d28d9;
+      --primary-light: #f5f3ff;
+      --accent-color: #ec4899;
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --tag-bg: #f1f5f9;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      font-size: 1.1rem;
+      padding-bottom: 40px;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+      color: white;
+      text-align: center;
+      padding: 24px 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 1.05rem;
+      opacity: 0.9;
+    }
+
+    /* 導覽分頁按鈕 */
+    nav.tabs {
+      display: flex;
+      background: var(--card-bg);
+      border-bottom: 2px solid var(--border-color);
+      overflow-x: auto;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .tab-btn {
+      flex: 1;
+      min-width: 85px;
+      padding: 14px 8px;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: center;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      color: var(--primary-color);
+      border-bottom-color: var(--primary-color);
+      background-color: var(--primary-light);
+    }
+
+    /* 主要內容區 */
+    main {
+      max-width: 800px;
+      margin: 16px auto;
+      padding: 0 12px;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* 卡片樣式 */
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-color);
+    }
+
+    .card h2 {
+      font-size: 1.45rem;
+      color: var(--primary-dark);
+      margin-bottom: 12px;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 6px;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      color: var(--primary-color);
+      margin: 14px 0 8px 0;
+    }
+
+    /* 行程時間軸 */
+    .timeline {
+      list-style: none;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--border-color);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 16px;
+      padding-left: 12px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -18px;
+      top: 8px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--primary-color);
+    }
+
+    .time-badge {
+      display: inline-block;
+      background: var(--tag-bg);
+      color: var(--primary-dark);
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+
+    /* 餐飲與住宿卡 */
+    .info-box {
+      background-color: var(--primary-light);
+      border-left: 4px solid var(--primary-color);
+      padding: 12px;
+      border-radius: 6px;
+      margin: 10px 0;
+      font-size: 1.05rem;
+    }
+
+    .info-box p {
+      margin-bottom: 4px;
+    }
+
+    .info-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 表格樣式 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 1.05rem;
+    }
+
+    th, td {
+      padding: 10px 12px;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    th {
+      background-color: var(--tag-bg);
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    /* 檢查清單 */
+    .checklist {
+      list-style: none;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 1.1rem;
+    }
+
+    .checklist-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-right: 12px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      body { font-size: 1.05rem; }
+      header h1 { font-size: 1.4rem; }
+      .card h2 { font-size: 1.3rem; }
+      .tab-btn { padding: 12px 6px; font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>東京逍遙遊～登上晴空塔、迪士尼雙樂園、富士山</h1>
+    <p>可樂旅遊 5天4夜 ＋ 桃園機場町草休行館 1夜（共 6 天）</p>
+  </header>
+
+  <!-- 頁籤導覽 -->
+  <nav class="tabs">
+    <button class="tab-btn" onclick="switchTab('overview')">總覽/航班</button>
+    <button class="tab-btn" onclick="switchTab('day1')">D1 5/17</button>
+    <button class="tab-btn" onclick="switchTab('day2')">D2 5/18</button>
+    <button class="tab-btn" onclick="switchTab('day3')">D3 5/19</button>
+    <button class="tab-btn" onclick="switchTab('day4')">D4 5/20</button>
+    <button class="tab-btn" onclick="switchTab('day5')">D5 5/21</button>
+    <button class="tab-btn" onclick="switchTab('day6')">D6 5/22</button>
+    <button class="tab-btn" onclick="switchTab('checklist')">備註/清單</button>
+  </nav>
+
+  <main>
+    <!-- 總覽分頁 -->
+    <div id="tab-overview" class="tab-content">
+      <div class="card">
+        <h2>✈️ 預定航班資訊（星宇航空 Starlux）</h2>
+        <table>
+          <tr>
+            <th>航段</th>
+            <th>日期</th>
+            <th>班機/時間</th>
+            <th>航線</th>
+          </tr>
+          <tr>
+            <td><b>去程</b></td>
+            <td>2027/05/17</td>
+            <td>JX804<br>15:00 - 19:00</td>
+            <td>台北(桃園 TPE) $\rightarrow$ 東京(成田 NRT)</td>
+          </tr>
+          <tr>
+            <td><b>回程</b></td>
+            <td>2027/05/21</td>
+            <td>JX805<br>20:10 - 23:20</td>
+            <td>東京(成田 NRT) $\rightarrow$ 台北(桃園 TPE)</td>
+          </tr>
+        </table>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 8px;">* 實際航班以團體確認之航班編號與飛行時間為準。</p>
+      </div>
+
+      <div class="card">
+        <h2>🏨 全程住宿安排概覽</h2>
+        <ul>
+          <li><b>第 1 天 (5/17)</b>：成田 GARDEN HOTEL 或 成田 MARROAD INTERNATIONAL HOTEL 或同級</li>
+          <li><b>第 2 天 (5/18)</b>：星野 RESORTS 1955 東京灣 / 東京灣凱悅 / 東京灣潮見王子 / 東京灣喜來登 或同級</li>
+          <li><b>第 3 天 (5/19)</b>：星野 RESORTS 1955 東京灣 / 東京灣凱悅 / 東京灣潮見王子 / 東京灣喜來登 或同級</li>
+          <li><b>第 4 天 (5/20)</b>：富士松園 / 本棲鳳凰 (原本棲 VIEW) / 御殿場 CLAD / 山中湖 SUN PLAZA / 春日居 VIEW 或同級溫泉飯店</li>
+          <li><b>第 5 天 (5/21)</b>：<b>桃園機場 町草休行館 (CHO Stay)</b>（因班機 23:20 抵達，特別安排於 T2 機場過夜）</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>🎁 團體專屬贈品與特色</h2>
+        <ul>
+          <li>D1 贈送壽司餐盒＋茶飲每人乙份</li>
+          <li>D4 富士野生動物園：乘坐叢林巴士（餵食體驗）</li>
+          <li>D4 山中湖白鳥號遊覽船</li>
+          <li>D5 晴空塔 350m 天望甲板門票 ＋ 贈送晴空塔造型手提袋每人乙個</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Day 1 -->
+    <div id="tab-day1" class="tab-content">
+      <div class="card">
+        <h2>第1天 (5/17)：桃園 $\rightarrow$ 東京成田機場</h2>
+        <div class="info-box">
+          <p><b>行程</b>：桃園機場集合 $\rightarrow$ 搭乘星宇航空 $\rightarrow$ 抵達成田機場 $\rightarrow$ 前往飯店</p>
+          <p><b>餐食</b>：【早餐】敬請自理 ｜ 【午餐】敬請自理 ｜ 【晚餐】機上簡餐（特別贈送壽司餐盒+茶飲每人乙份）</p>
+          <p><b>住宿</b>：成田 GARDEN HOTEL 或 成田 MARROAD INTERNATIONAL HOTEL 或同級旅館</p>
+        </div>
+        <ul class="timeline">
+          <li class="timeline-item">
+            <span class="time-badge">13:00</span>
+            <p><b>桃園機場集合</b>：認明可樂旅遊領隊（穿著黑底搭配黃色背心）。</p>
+          </li>
+          <li class="timeline-item">
+            <span class="time-badge">15:00 - 19:00</span>
+            <p><b>星宇航空 JX804</b> 飛往東京成田機場。</p>
+          </li>
+          <li class="timeline-item">
+            <span class="time-badge">19:00~</span>
+            <p>辦理入境手續，領取贈送之壽司餐盒與茶飲，專車接駁至成田地區飯店入住。</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div id="tab-day2" class="tab-content">
+      <div class="card">
+        <h2>第2天 (5/18)：東京迪士尼樂園 (搭乘飯店接駁巴士往返)</h2>
+        <div class="info-box">
+          <p><b>行程</b>：東京迪士尼樂園 (Tokyo Disneyland) 暢玩一整天</p>
+          <p><b>餐食</b>：【早餐】飯店早餐 ｜ 【午餐】方便遊玩敬請自理 ｜ 【晚餐】方便遊玩敬請自理</p>
+          <p><b>住宿</b>：星野 RESORTS 1955 東京灣 或 東京灣凱悅酒店 或 東京灣潮見王子大飯店 或 東京灣喜來登酒店 或同級</p>
+        </div>
+        <ul class="timeline">
+          <li class="timeline-item">
+            <span class="time-badge">上午</span>
+            <p>飯店享用早餐後，搭乘飯店免費接駁巴士前往東京迪士尼樂園。</p>
+          </li>
+          <li class="timeline-item">
+            <span class="time-badge">全天</span>
+            <p><b>迪士尼樂園歡樂體驗</b>：體驗夢幻世界、各式遊樂設施與經典花車遊行。</p>
+          </li>
+          <li class="timeline-item">
+            <span class="time-badge">晚上</span>
+            <p>依約定時間搭乘接駁巴士返回東京灣區飯店休息。</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Day 3 -->
+    <div id="tab-day3" class="tab-content">
+      <div class="card">
+        <h2>第3天 (5/19)：東京迪士尼海洋 (搭乘飯店接駁巴士往返)</h2>
+        <div class="info-box">
+          <p><b>行程</b>：東京迪士尼海洋 (Tokyo DisneySea) 暢玩一整天</p>
+          <p><b>餐食</b>：【早餐】飯店早餐 ｜ 【午餐】方便遊玩敬請自理 ｜ 【晚餐】方便遊玩敬請自理</p>
+          <p><b>住宿</b>：星野 RESORTS 1955 東京灣 或 東京灣凱悅酒店 或 東京灣潮見王子大飯店 或 東京灣喜來登酒店 或同級</p>
+        </div>
+        <ul class="timeline">
+          <li class="timeline-item">
+            <span class="time-badge">上午</span>
+            <p>飯店享用早餐，搭乘接駁巴士前往迪士尼海洋。</p>
+          </li>
+          <li class="timeline-item">
+            <span class="time-badge">全天</span>
+            <p><b>迪士尼海洋暢玩</b>：探險地中海港灣、美人魚礁湖、美國濱海公園等主題區。</p>
+          </li>
+          <li class="timeline-item">
+            <span class="time-badge">晚上</span>
+            <p>搭乘接駁車返回飯店休息。</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Day 4 -->
+    <div id="tab-day4" class="tab-content">
+      <div class="card">
+        <h2>第4天 (5/20)：富士野生動物園 $\rightarrow$ 御殿場 Outlet $\rightarrow$ 山中湖白鳥號 $\rightarrow$ 溫泉區</h2>
+        <div class="info-box">
+          <p><b>行程</b>：富士野生動物園 (搭乘叢林巴士餵食體驗) $\rightarrow$ 御殿場 PREMIUM OUTLETS $\rightarrow$ 白鳥號遊覽船 $\rightarrow$ 富士五湖溫泉區</p>
+          <p><b>餐食</b>：【早餐】飯店早餐 ｜ 【午餐】發日幣1500自理 ｜ 【晚餐】飯店內用餐 或 發日幣2000自理 或 自助百匯料理</p>
+          <p><b>住宿</b>：富士松園 或 本棲鳳凰 (原本棲 VIEW) 或 御殿場 CLAD 或 山中湖 SUN PLAZA 或 石和 新光 或 春日居 VIEW 或同級</p>
+        </div>
+        <ul class="timeline">
+          <li class="timeline-item">
+            <span class="time-badge">上午</span>
+            <p><b>富士野生動物園</b>：搭乘叢林巴士（特別包含 3~5人共用一盒餵食食材），近距離觀察猛獸。</p>
+          </li>
+          <li class="timeline-item">
+            <span class="time-badge">中午</span>
+            <p><b>御殿場 PREMIUM OUTLETS</b>：自由購物與發放日幣 1,500 元享用午餐。</p>
+          </li>
+          <li class="timeline-item">
+            <span class="time-badge">下午</span>
+            <p><b>白鳥號遊覽船</b>：搭乘白鳥號欣賞山中湖與富士山壯麗美景。</p>
+          </li>
+          <li class="timeline-item">
+            <span class="time-badge">晚上</span>
+            <p>入住溫泉飯店，享用晚餐並體驗日式溫泉泡湯。</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Day 5 -->
+    <div id="tab-day5" class="tab-content">
+      <div class="card">
+        <h2>第5天 (5/21)：光伸免稅店 $\rightarrow$ 淺草觀音寺 $\rightarrow$ 晴空塔 $\rightarrow$ 成田機場 $\rightarrow$ 桃園機場</h2>
+        <div class="info-box">
+          <p><b>行程</b>：溫泉區 $\rightarrow$ 光伸免稅店 $\rightarrow$ 淺草觀音寺 (風雷神門、仲見世街) $\rightarrow$ 登上晴空塔 (350m天望甲板) & 天空町商店街 $\rightarrow$ 成田機場 $\rightarrow$ 桃園機場</p>
+          <p><b>餐食</b>：【早餐】飯店早餐 ｜ 【午餐】方便遊玩敬請自理 ｜ 【晚餐】機上簡餐</p>
+          <p><b>住宿</b>：<b>桃園機場 町草休行館 (CHO Stay Capsule Hotel)</b></p>
+        </div>
+        <ul class="timeline">
+          <li class="timeline-item">
+            <span class="time-badge">上午</span>
+            <p>參訪<b>光伸免稅店</b>（贈送晴空塔造型手提袋每人乙個），隨後造訪<b>淺草觀音寺</b>與仲見世街參拜散策。</p>
+          </li>
+          <li class="timeline-item">
+            <span class="time-badge">下午</span>
+            <p><b>登上晴空塔 350m 天望甲板</b>俯瞰東京全景，並於天空町商店街自由購物。</p>
+          </li>
+          <li class="timeline-item">
+            <span class="time-badge">20:10 - 23:20</span>
+            <p><b>星宇航空 JX805</b> 飛往桃園機場，預計深夜 23:20 抵達。</p>
+          </li>
+          <li class="timeline-item">
+            <span class="time-badge">23:50~</span>
+            <p><b>入住桃園機場町草休行館</b>：因返台時間太晚，免去深夜趕車折騰，入境後直接前往 T2 5樓「町草休行館」辦理 Check-in 休息。</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Day 6 (額外增加過夜日) -->
+    <div id="tab-day6" class="tab-content">
+      <div class="card">
+        <h2>第6天 (5/22)：町草休行館退房 $\rightarrow$ 輕鬆返家</h2>
+        <div class="info-box">
+          <p><b>行程</b>：桃園機場町草休行館享用早餐/整理行李 $\rightarrow$ 搭乘機捷或接送返回溫馨的家</p>
+          <p><b>餐食</b>：【早餐】町草休行館或機場美食街自理 ｜ 【午餐】溫馨的家</p>
+          <p><b>住宿</b>：溫暖的家</p>
+        </div>
+        <ul class="timeline">
+          <li class="timeline-item">
+            <span class="time-badge">08:00 - 10:00</span>
+            <p><b>舒適起床與盥洗</b>：充分休息後，於町草休行館整理行李與退房。</p>
+          </li>
+          <li class="timeline-item">
+            <span class="time-badge">10:30~</span>
+            <p><b>返家</b>：搭乘桃園機場捷運、國道客運或預約包車專車接送返回溫馨的家，結束完整的 6 天行程！</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 備註與清單 -->
+    <div id="tab-checklist" class="tab-content">
+      <div class="card">
+        <h2>⚠️ 團體行程重要注意事項</h2>
+        <ul>
+          <li><b>領隊識別</b>：領隊穿著黑底搭配黃色背心，請於機場集合時留意。</li>
+          <li><b>迪士尼前置告知</b>：前往迪士尼海洋者，請於出團前 14 個工作日告知旅行社。</li>
+          <li><b>白鳥號替代方案</b>：如遇突發狀況致白鳥號無法搭乘，每人退費日幣 1,000 元。</li>
+          <li><b>晴空塔門票</b>：晴空塔門票為完全預約制，入場時間需配合團體預約時間。</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>🎒 出國隨身檢查清單</h2>
+        <ul class="checklist">
+          <li class="checklist-item"><input type="checkbox" id="c1"><label for="c1">護照（確認效期 6 個月以上）</label></li>
+          <li class="checklist-item"><input type="checkbox" id="c2"><label for="c2">Visit Japan Web (VJW) 入境填寫完成</label></li>
+          <li class="checklist-item"><input type="checkbox" id="c3"><label for="c3">日本上網卡 / SIM 卡 / 漫遊</label></li>
+          <li class="checklist-item"><input type="checkbox" id="c4"><label for="c4">日幣現鈔與信用卡</label></li>
+          <li class="checklist-item"><input type="checkbox" id="c5"><label for="c5">兒童推車與幼童隨身物品</label></li>
+          <li class="checklist-item"><input type="checkbox" id="c6"><label for="c6">町草休行館預約確認單（第5晚過夜）</label></li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // 切換頁籤功能
+    function switchTab(tabId) {
+      const contents = document.querySelectorAll('.tab-content');
+      const buttons = document.querySelectorAll('.tab-btn');
+
+      contents.forEach(content => content.classList.remove('active'));
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      const targetContent = document.getElementById(`tab-${tabId}`);
+      if (targetContent) {
+        targetContent.classList.add('active');
+        localStorage.setItem('cola_active_tab', tabId);
+      }
+
+      // 幫對應按鈕加上 active 類別
+      buttons.forEach(btn => {
+        if (btn.getAttribute('onclick').includes(tabId)) {
+          btn.classList.add('active');
+        }
+      });
+
+      window.scrollTo(0, 0);
+    }
+
+    // 初始化與記憶最後點擊的分頁
+    function initTabs() {
+      const savedTab = localStorage.getItem('cola_active_tab') || 'overview';
+      switchTab(savedTab);
+
+      // 恢復檢查清單狀態
+      const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+      checkboxes.forEach(box => {
+        const savedState = localStorage.getItem(`cola_chk_${box.id}`);
+        if (savedState === 'true') {
+          box.checked = true;
+        }
+        box.addEventListener('change', function() {
+          localStorage.setItem(`cola_chk_${box.id}`, this.checked);
+        });
+      });
+    }
+
+    initTabs();
+  </script>
+</body>
+</html>
